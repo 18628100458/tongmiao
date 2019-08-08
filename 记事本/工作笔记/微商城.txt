@@ -86,4 +86,13 @@ if (browser.versions.mobile) {//判断是否是移动设备打开。browser代�
   版本号49之后的chrome跨域设置不支持目标属性直接--disable-web-security
   需要用cmd cd进入目录然后执行：
   chrome.exe --disable-web-security --user-agent="Android" --user-data-dir="C:/temp-chrome-eng
-  
+  9.vue 引用其他实例方法的时候，要采取渲染延迟
+ 10.vue 渲染出现闪烁问题
+    
+<div id="app" v-cloak>
+    {{ message }}
+</div>
+[v-cloak] {
+	display: none !important;
+}
+    
