@@ -1,0 +1,64 @@
+vue-cli 2.5 开发问题
+1.搭建环境npm安装jquery开发和生产环境都要，生产环境需要手动添加然后再重新依耐webpack.base.conf.js中还要配置。
+2.有时候会编译错误，转换的都安装了还是有这个问题时就要建一个postcss.config.js
+先安装 npm install --save-dev postcss-loader autoprefixer
+module.exports = {  
+    plugins: {  
+	//自动添加前缀的插件
+      'autoprefixer': {browsers: 'last 5 version'}  
+    }  
+  } 
+  3.在config文件下的index.js下将host:localhost改为'0.0.0.0'可以让其他访问我的项目。
+  4.
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+jquery 开发兼容ie：
+ 1.当标签上的函数和查找dome的事件，优选dome查找，因为请求接口会有影响。
+ 2.在接口后加时间戳，为了防止缓存原因。
+ 3.下载文件用表单。
+ 4.JSON.stringify（）转换有时会有问题会多括号，请求是成功但是返回不了数据。
+ 5.ie的阻止事件冒泡：
+    var _this=event.srcElement||event.target;//兼容ie  e.target==this 写法不识别  查找自己不能用函数，要dome查找不然this指向回是windows
+  var e = window.event || arguments.callee.caller.arguments[0];
+  
+  if(_this==this){ 
+       
+        getOption(i,length,cmenuId,pmenuId);//执行类容
+        
+    }
+  if(document.all){  //只有ie识别
+   e.cancelBubble=true;
+ 
+
+
+}else{
+   e.stopPropagation();
+}
+// e.preventDefault();   //ie不兼容
+if(e && e.preventDefault){   
+   e.preventDefault();
+}else{  
+   window.event.returnValue = false;//注意加window
+
+}
+6.用jsonp解决跨越请求正式环境问题。
+7.把防火墙关了,访问我的项目。
+8.要养成写代码的好习惯，一个分号也不要忘记，ie会报错。
