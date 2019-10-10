@@ -1,6 +1,13 @@
 vue-cli 2.5 开发问题
-1.搭建环境npm安装jquery开发和生产环境都要，生产环境需要手动添加然后再重新依耐webpack.base.conf.js中还要配置。
-2.有时候会编译错误，转换的都安装了还是有这个问题时就要建一个postcss.config.js
+
+1.css全局引入min.js编译失败postcss没有找到
+   新建postcss.config.js配置
+ 2.组件一个页面同时用两个被覆盖问题
+ 3.少操作dome改变css,有事会起冲突
+ 
+ 
+4.搭建环境npm安装jquery开发和生产环境都要，生产环境需要手动添加然后再重新依耐webpack.base.conf.js中还要配置。
+5.有时候会编译错误，转换的都安装了还是有这个问题时就要建一个postcss.config.js
 先安装 npm install --save-dev postcss-loader autoprefixer
 module.exports = {  
     plugins: {  
@@ -8,9 +15,69 @@ module.exports = {
       'autoprefixer': {browsers: 'last 5 version'}  
     }  
   } 
-  3.在config文件下的index.js下将host:localhost改为'0.0.0.0'可以让其他访问我的项目。
-  4.
+  6.在config文件下的index.js下将host:localhost改为'0.0.0.0'可以让其他访问我的项目。
+  7.解决ie下打开项目
+  安装npm install es6-promise  官网https://www.npmjs.com/package/es6-promise
+    main.js下添加
+  import promise from 'es6-promise'
+promise.polyfill
+
+安装npm install -save babel-polyfill    
+webpack.base.conf.js
+module.exports = {
+    entry: {
+        app: ['babel-polyfill','./src/main.js'],
+    },
+	https://www.npmjs.com/package/classlist-polyfill
+vue-awesome-swiper在IE9下报错， 主要原因是element.classlist.add()方法在ie9中是不支持的。 解决方法是加个ployfill
+
+npm install classlist-polyfill --save
+
+npm install  babel-polyfill  --save
+
+在webpack.base.conf.js中 加入classlist-polyfill
+
+修改 module.exports    entry 如下：
+
+module.exports = {
+
+// app: './src/main.js'
+
+entry: { app: ['classlist-polyfill', 'babel-polyfill', './src/main.js']}
+
+}
+
+npm install --save-dev babel-preset-es2
+
+安装完成后项目目录下新建
+
+vi .babelrc
+{
+  "presets": ["es2015","stage-0"],
+  "plugins": [
+    ["transform-runtime", {
+      "polyfill": false,
+      "regenerator": true
+    }]
+  ]
+}
+8.更改打包路径
+config文件下的index.js
+
+   index: path.resolve(__dirname, '../dist/index.html'),
+
+    // Paths
+    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsSubDirectory: 'static',
+    assetsPublicPath: './',
   
+  9.router-view中的内容显示不出来。路由history模式。  https://blog.csdn.net/qq_32340877/article/details/79105032
+
+这个坑是当你使用了路由之后，在没有后端配合的情况下就手贱打开路由history模式的时候，打包出来的文件也会是一片空白的情况，
+在router文件下index.js
+关掉   mode: "history",被网上坑的手贱
+10.安装本地服务npm install -g http-server
+启动命令http-server
 
 
 
@@ -29,7 +96,7 @@ module.exports = {
 
 
 
-
+http://light7.cn/  移动库
 jquery 开发兼容ie：
  1.当标签上的函数和查找dome的事件，优选dome查找，因为请求接口会有影响。
  2.在接口后加时间戳，为了防止缓存原因。

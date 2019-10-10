@@ -1,0 +1,15 @@
+go的环境变量配置： windows7
+计算机-》控制面板-》系统和安全-》查看计算机名称-》高级系统设置-》环境变量
+
+1.变量名：GOROOT  值：go的安装目录     （编辑系统变量）
+2.变量名：Path  值： %GOROOT%bin;   ：go安装下的bin目录下 多个要用；隔开（编辑系统变量 一般会自动添加）
+3.配置GOPATH环境变量，也是同样右键新建，变量名GOPATH ，变量值 D:\goProgect (这个指向后续开发代码目录可以任意指定  新建系统变量  ）
+  go env 查看是否配置成功
+  下载插件参考：https://blog.csdn.net/dmt742055597/article/details/85865186
+  如：
+  cd $GOPATH/src
+mkdir github.com
+cd $GOPATH/src/github.com
+mkdir acroca cweill derekparker go-delve josharian karrick mdempsky pkg ramya-rao-a rogpeppe sqs uudashr
+cd $GOPATH/src/github.com/acroca
+git clone https://github.com/acroca/go-symbols.git
