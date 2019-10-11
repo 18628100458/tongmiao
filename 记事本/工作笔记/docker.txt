@@ -1,0 +1,7 @@
+基本常用命令
+docker ps -a 查看所有容器 
+docker ps -s 查看所有正在运行的容器
+systemctl restart docker重启docker
+mysql> show databases; 查看mysql版本
+docker start 5448 运行某个容器
+docker stop 5448 停止某个容器

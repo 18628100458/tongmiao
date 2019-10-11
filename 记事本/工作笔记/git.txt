@@ -1,0 +1,5 @@
+创建好的常用命令
+git add .
+git commit -m  "描述"
+git pull origin master
+git push origin master
