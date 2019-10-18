@@ -5,3 +5,104 @@ systemctl restart docker重启docker
 mysql> show databases; 查看mysql版本
 docker start 5448 运行某个容器
 docker stop 5448 停止某个容器
+
+
+
+windosw 7旗舰版安装linux虚拟机 vmware workstation 64位  开机f8进入BIOS界面，允许虚拟机f7打开高级设置intel virtuallzation technology 开启
+
+
+centos8.linux :
+sudo passwd root 更改root密码 （因为安装系统时没有设置root导致终端进不了root账户）
+
+配置安装的时候要设置连接网络
+ping www.baidu.com   测试有没网
+uname -r  查看内核版本
+安装 yum -y install docker
+启动 systemctl start docker
+查看 docker images
+
+
+
+
+1、检查内核版本，必须是3.10及以上
+uname -r
+2、安装docker
+yum install docker
+3、输入y确认安装
+4、启动docker
+[root@localhost ~]# systemctl start docker
+[root@localhost ~]# docker -v
+Docker version 1.12.6, build 3e8e77d/1.12.6
+5、开机启动docker
+[root@localhost ~]# systemctl enable docker
+Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service to /usr/lib/systemd/system/docker.service.
+6、停止docker
+systemctl stop docker
+7、重启docker服务
+service docker restart
+
+
+
+1、搜索镜像
+[root@localhost ~]# docker search tomcat
+2、拉取镜像
+[root@localhost ~]# docker pull tomcat
+3、根据镜像启动容器
+docker run --name mytomcat -d tomcat:latest
+4、docker ps  
+查看运行中的容器
+5、 停止运行中的容器
+docker stop  容器的id
+6、查看所有的容器
+docker ps -a
+7、启动容器
+docker start 容器id
+8、删除一个容器
+ docker rm 容器id
+9、启动一个做了端口映射的tomcat
+[root@localhost ~]# docker run -d -p 8888:8080 tomcat
+-d：后台运行
+-p: 将主机的端口映射到容器的一个端口    主机端口:容器内部的端口
+ 
+10、为了演示简单关闭了linux的防火墙
+service firewalld status ；查看防火墙状态
+service firewalld stop：关闭防火墙
+11、查看容器的日志
+docker logs container-name/container-id
+ 
+更多命令参看
+https://docs.docker.com/engine/reference/commandline/docker/
+可以参考每一个镜像的文档
+
+
+
+解决：关闭centos7中防火墙即可，执行以下命令：
+
+sudo systemctl stop firewalld.service && sudo systemctl disable firewalld.service
+
+
+192.168.18.130虚拟机
+
+使用中
+
+docker ps
+// 775c7c9ee1e1为docker中的id
+docker exec -it 775c7c9ee1e1 /bin/bash 
+// python为docker容器内运行的项目名
+docker inspect -f '{{.ID}}' python 
+
+
+docker run -it --name webdemo -p 8080:80 tomcat /bin/bash
+docker run -d -p 8080:80 镜像名
+启动一个镜像，并将容器的80端口映射到主机的8080端口：
+流程：
+启动docker服务service docker start
+启动其中一个容器服务docker start 74f475b826ca 
+进入容器docker attach 74f475b826ca
+在执行配置命令cd bin 
+./catalina.sh run
+
+
+
+
+
