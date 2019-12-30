@@ -40,6 +40,8 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service 
 systemctl stop docker
 7、重启docker服务
 service docker restart
+查看运行状态
+systemctl status docker
 
 
 
@@ -102,6 +104,51 @@ docker run -d -p 8080:80 镜像名
 在执行配置命令cd bin 
 ./catalina.sh run
 
+curl docker_ip查看容器是否启动成功
+阿里云服务器  配置后访问公网ip
+
+shadowsocks 配置也是
+
+1、链接到公网ip
+
+2、使用rz、sz语法进行上传、下载
+
+　　如果没有rz、sz，则给服务器里安装这两个包
+
+yum install lrzsz
+安装完毕即可使用
+
+rz，sz是便是Linux/Unix同Windows进行ZModem文件传输的命令行工具。
+
+windows端需要支持ZModem的telnet/ssh客户端(xshell支持,好像putty不支持)，SecureCRT就可以用SecureCRT登陆到Unix/Linux主机（telnet或ssh均可）
+
+运行命令rz，即是接收文件，xshell就会弹出文件选择对话框，选好文件之后关闭对话框，文件就会上传到linux里的当前目录。
+
+运行命令sz file 就是发文件到windows上（保存的目录是可以配置） 比ftp命令方便多了，而且服务器不用再开FTP服务了。
+
+更简便的方法是直接拖动文件到Xshell里面，就可以完成上传
+
+
+删除镜像
+
+docker rmi [image]
+
+进入容器
+docker exec -it container_id  bash
+docker exec -it goofy_almeida /bin/bash
+
+
+退出
+exit
+
+或者按键：
+
+Ctrl + D
+
+rm -rf /opt/svn #将会删除/opt/svn/目录以及其下所有文件夹，包括文件
+
+
+Podman
 
 
 

@@ -1,3 +1,4 @@
 mysql -5.7.26-win32
 cmd 权限 root不能进更改配置文件
 进入mysql文件->data->my.ini->在[mysqld]下添加skip-grant-tables不需要密码
+--skip-grant-tables 的意思是启动MySQL服务的时候跳过权限表认证。
